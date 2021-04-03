@@ -2,134 +2,218 @@
 <html>
     {% load static %}
     <head>
-        <title>Spotser</title>
+        <title>Spotster</title>
         <link rel="icon" href="{% static 'img/icon.png' %}">
     </head>
     <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
-    <body>
+    <body onload="loader_feed()">
         <div class="homepage">
             <!-- header import -->
             {% include 'header.html' %}
             
             <!-- 3 divs -->
-            <div class="container_newsfeed">
-                
+            <div class="container_newsfeed not-loaded" id="div-loaded">
+
+                <!-- 1st div -->
                 <div class="container1">
-                    <div class="c1">
-                        <table>
-                        {% for i in user %}
-                        <tr>
-                            <td class="c1-img">
-                                <a href="profile"><img src="{% static 'img/defaultpp.jpg' %}" style="width:50px"></a>
-                            </td>
-                            <td class="c1-label"> 
-                                <a href="profile">{{i.first_name}} {{i.last_name}}</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </table>
-                    </div>
-                    <div class="c1">
-                        <div id="googleMap" style="width:100%;height:400px;"></div>
-
-    <script>
-    function myMap() {
-    var mapProp= {
-    center:new google.maps.LatLng(51.508742,-0.120850),
-    zoom:5,
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
-
-                    </div>
+                    {% include '1_container.html' %}
                 </div>
+
+                <!-- 2nd div -->
                 <div class="container2">
-                    <div class="c2-new">
-                        <form>
-                            <div class="c2-text">
-                                <textarea placeholder="Let's create a new sport event..."></textarea>
-                            </div>
-                            <div class="c2-new-buttons">
-                                <div class="c2-btns-l">
-                                    <table>
-                                        <td><img src="{% static 'icon/photo.png' %}"></td>
-                                        <td>Photos/Videos</td>
-                                    </table>
-                                </div>
-                                <div class="c2-btns-v">
-                                    <table>
-                                        <td><img src="{% static 'icon/venue.png' %}"></td>
-                                        <td>Select Venue</td>
-                                    </table>
-                                </div>
-                                <div class="c2-btns-e">
-                                    <table>
-                                        <td><img src="{% static 'icon/calender.png' %}"></td>
-                                        <td>Choose Date</td>
-                                    </table>
-                                </div>
-                            </div>
-                        </form>
+                    <!-- interest-story -->
+                    <div class="i-story">
+                        <div class="story">
+                            <figure>
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                            </figure>
+                        </div>
                     </div>
-                    {% for i in others %}
+
+                    <!-- new post -->
+                    {% include 'new_post.html' %}
+<!--                    {%for post in posts%}-->
+<!--                     {% for p in pu %}-->
+<!--                        {% if p.id == post.author_id %}-->
+<!--                            {{p.first_name}}{{p.last_name}}-->
+<!--                            {{post.usercontent}}-->
+<!--                    {% endif %}-->
+<!--                    {% endfor %}-->
+<!--                    {% endfor %}-->
+                    <!-- posted contents -->
+                    {%for post in posts%}
+                        {% for p in pu %}
+                            {% if p.id == post.author_id %}
                     <div class="c2">
-                        <table class="c2-post">
-                            <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                            <td style="font-weight: bold;">{{i.first_name}} {{i.last_name}}<br>
-                                <p class="light">12:30pm</p>
-                            </td>
-                        </table>
+                        <div style="overflow: hidden;">
+                            <div class="c2-post">
+                                <table>
+                                    <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    <td class="posted-name"><a href="">{{p.first_name}} {{p.last_name}}</a>
+                                    </td>
+                                    <td>
+                                        {{post.feeling}}
+                                    </td>
+                                    <td class="femoji">
+                                        <img src='/static/{{post.emoji}}'>
+                                    </td>
+                                </table>
+                            </div>
+                            <div class="light" style="float: right; font-size: 15px; padding: 15px;">
+                                {{post.created}}
+                            </div>
+                        </div>
+                        
                         <div class="caption">
-                            Today Futsal anyone?dsadmaslkdnasjdkasjncksajnjsandjkasndksabdksabcksabckasbcksajcnascnacnasjcnacnsacnakscnskacnacnaskcasc
+                            {{post.usercontent}}
+                            
+                            
+                            
                         </div>
-                        <div class="location">
-                            <table>
-                                <td><img src="{% static 'icon/venue.png' %}"></td>
-                                <td>ABC Futsal</td>
-                            </table>
+                        <div id="{{post.id}}" style="display:none">{{post.userfile}}</div>
+                        
+                        <div class="postedimg" id="newid{{post.id}}">
+                            
+                            <video src="media/{{post.userfile}}" id='vid_spo{{post.id}}' height='100%' width='100%' controls></video>
+                            <img src="media/{{post.userfile}}" id='img_spo{{post.id}}'>
                         </div>
-                        <div class="postedimg">
-                            <img src="{% static 'media/w1.png' %}">
-                        </div>
+                       
+                       
+                        <script>
+                            var x=document.getElementById(`{{post.id}}`).innerHTML;
+                            console.log(x);
+                    
+                            var pics = /\.(jpeg|jpg|png)$/;
+                            var vids = /\.(mp4|wmv)/;
+            
+
+                            if (pics.test(x)){
+                                document.getElementById('vid_spo{{post.id}}').style.display='none';
+                            }
+                            else if (vids.test(x)){
+                                document.getElementById('img_spo{{post.id}}').style.display='none';
+                            }
+                            else{
+                                
+                                document.getElementById('newid{{post.id}}').style.display='none';
+                            }
+                       
+                            
+                        </script>
                         <div class="joinin">
                             <form>
-                                <input type="submit" value="JOIN">
-                            </form>
-                            <form>
-                                <input type="submit" value="INTERESTED">
-                            </form>
-                            <form>
-                                <input type="submit" value="MAYBE">                        
+                                <label for="like" id="i-l">
+                                    <span>120</span><img src="{% static 'icon/like-i.png' %}">
+                                </label>
+                                <label for="like" id="a-l">
+                                    <span>120</span><img src="{% static 'icon/like.png' %}">
+                                </label>
+                                <label for="like" id="i-d">
+                                    <span>22</span><img src="{% static 'icon/dislike-i.png' %}">
+                                </label>
+                                <label for="like" id="a-d">
+                                    <span>22</span><img src="{% static 'icon/dislike.png' %}">
+                                </label>
+                                <label for="like" id="i-c" onclick="myComment()">
+                                    <span>40</span><img src="{% static 'icon/comment-i.png' %}">
+                                </label>
+                                <label for="like" id="a-c">
+                                    <span>40</span><img src="{% static 'icon/comment.png' %}">
+                                </label>
+                                <label for="like" id="i-s">
+                                    <img src="{% static 'icon/share-i.png' %}">
+                                </label>
+                                <label for="like" id="a-s">
+                                    <img src="{% static 'icon/share.png' %}">
+                                </label>
+                                <label for="like" id="i-sa">
+                                    <img src="{% static 'icon/saved-i.png' %}">
+                                </label>
+                                <label for="like" id="a-sa">
+                                    <img src="{% static 'icon/saved-a.png' %}">
+                                </label>
+                                <label for="like" id="i-f">
+                                    <img src="{% static 'icon/flag-i.png' %}">
+                                </label>
+                                <label for="like" id="a-f">
+                                    <img src="{% static 'icon/flag.png' %}">
+                                </label>
                             </form>
                         </div>
+                        <div class="comment-section" id="c-section">
+                            <a href="">View all comments...</a>
+                            <label>
+                                <input type="text" placeholder="Write comment...">
+                            </label>
+                        </div>
                     </div>
+                    {% endif %}
+                    {% endfor %}
                     {% endfor %}
                 </div>
+
+                <!-- 3rd div -->
                 <div class="container3">
-                    <div class="c3">
-                        <div class="c3-sponser">
-                            <p>Sponsered</p>
-                            <img src="{% static 'img/sponser.png' %}">
-                        </div>
-                    </div>
-                    <div class="c3">
-                        <p>Followers</p>
-                        <table>
-                        {% for i in others %}
-                        <tr class="chatuser">
-                            <td class="c3-img">
-                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                            </td>
-                            <td class="c3-label"> 
-                                {{i.first_name}} {{i.last_name}}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </table>
-                    </div>
+                    {% include '2_container.html' %}
                 </div>
             </div>
         </div>
+
+        <script src="{% static 'js/header.js' %}"></script>
+        <script src="{% static 'js/newsfeed.js' %}"></script>
+    </body>
+</html>

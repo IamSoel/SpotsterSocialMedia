@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,12 +37,19 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'home',
+    'discover',
+    'complete',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'spotsterapi',
+    
+    'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
@@ -81,9 +89,9 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'spotster',
-        'USER': 'myuser',
-        'PASSWORD': 'rusan@123',
+         'NAME': os.getenv('name'),
+        'USER': os.getenv('user'),
+        'PASSWORD': os.getenv("dbpass"),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -107,6 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        
+    ]
+}
+# from spotsterapi.serializers import UserSerializer
+# USER_DETAILS_SERIALIZER = UserSerializer 
 
 
 # Internationalization
