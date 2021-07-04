@@ -47,10 +47,6 @@ def registration_view(request):
             data['gender']=account.gender
             data['birthday']=account.birthday
             data['id']=account.id
-            
-
-            # token = Token.objects.get(user=account).key
-            # data['token'] = token
         else:
             data = serializer.errors
         return Response(data)   
@@ -99,15 +95,22 @@ def login_user(request):
                 follower_list.append(i.id)
             counts=len(my_id)
 
-        if serializer.is_valid():
-            data['response']='Logged in'
-            data['id']=usrs_id
-            data['email']=email
-            data['following']=following_list
-            data['followers']=follower_list
-            data['follower_count']=counts
-            data['following_count']=count_following
+            if serializer.is_valid():
+                data['response']='Logged in'
+                data['id']=usrs_id
+                data['email']=email
+                data['following']=following_list
+                data['followers']=follower_list
+                data['follower_count']=counts
+                data['following_count']=count_following
+            else:
+                data = serializer.errors
         else:
-            data = serializer.errors
+            data['response']='Invalid Email or Password.'
+            data['code']='101'
         return Response(data) 
+
+
+
+
  

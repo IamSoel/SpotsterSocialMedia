@@ -1,7 +1,12 @@
+from itertools import chain
+
 from django.shortcuts import render, redirect
-from home.models import registration,profileinfo
+from home.models import registration
 # Create your views here.
 from discover.models import followers
+from complete.models import userdetails
+
+from home.models import userpost
 
 
 def discover(request):
@@ -24,6 +29,12 @@ def discover(request):
 
         except:
             pass
+        user_data = userdetails.objects.all()
+        mydetials = 0
+        try:
+            mydetials = userdetails.objects.get(owner_id=userid)
+        except:
+            pass
         other_user = registration.objects.all().exclude(email=email)
         dict1 = {
             'email': email,
@@ -32,19 +43,27 @@ def discover(request):
             'other': other_user,
             'followers': my_id,
             'count':counts,
-            'count_following':count_following}
+            'count_following':count_following,
+            'mydetials': mydetials,
+            'userdata': user_data }
+
         return render(request, 'discover.html', dict1)
 
 
 def newsfeed(request):
     email = request.session['email']
-    profile= request.FILES['image']
+    try:
+        profile= request.FILES['image']
+    except:
+        profile =None
     bio=request.POST['bio']
     inte = request.POST.getlist('interest')
 
     user = registration.objects.filter(email=email)
     usr_id = registration.objects.get(email=email)
     usrs_id = usr_id.id
+    pu = registration.objects.all()
+    qs = None
     other = None
     try:
         em = followers.objects.get(user_id=usrs_id)
@@ -52,9 +71,34 @@ def newsfeed(request):
 
     except:
         pass
-    savedata=profileinfo(owner_id=usrs_id,profilepic=profile,userbio=bio,userinterest=inte)
-    savedata.save()
-    return render(request, 'newsfeed.html', {'email': email, 'user': user, 'others': other})
+
+    try:
+        posts = []
+        try:
+            p_post = userpost.objects.all()
+            posts.append(p_post)
+        except:
+            pass
+
+        if len(posts) > 0:
+            qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
+    except:
+        pass
+    counts = 0
+    count_following =0
+    dict1 = {
+        'email': email,
+        'user': user,
+        'others': other,
+        'count': counts,
+        'count_following': count_following,
+        'posts': qs,
+        'pu': pu}
+
+    userdata = userdetails(profile_pic= profile, user_bio= bio, user_interest= inte , owner_id=usrs_id)
+    userdata.save()
+
+    return render(request, 'home.html', dict1)
 
 
 def discover_more(request):
@@ -110,6 +154,13 @@ def follower(request):
 
         except:
             pass
+
+        user_data = userdetails.objects.all()
+        mydetials = 0
+        try:
+            mydetials = userdetails.objects.get(owner_id=userid)
+        except:
+            pass
         other_user = registration.objects.all().exclude(email=email)
         dict1 = {
             'email': email,
@@ -118,5 +169,49 @@ def follower(request):
             'other': other_user,
             'followers': my_id,
             'count':counts,
-            'count_following':count_following}
+            'count_following':count_following,
+            'mydetials': mydetials,
+            'userdata': user_data }
+
         return render(request, 'follower.html', dict1)
+
+def following(request):
+    if request.session['email']:
+        email = request.session['email']
+        user = registration.objects.filter(email=email)
+        id = registration.objects.get(email=email)
+        userid = id.pk
+        other = None
+        my_id = None
+        counts =0
+        count_following=0
+        try:
+            em = followers.objects.get(user_id=userid)
+            other = [user_id for user_id in em.following.all()]
+            count_following=len(other)
+            my_id = [user_id for user_id in em.follow_me.all()]
+            counts =len(my_id)
+
+
+        except:
+            pass
+
+        user_data = userdetails.objects.all()
+        mydetials = 0
+        try:
+            mydetials = userdetails.objects.get(owner_id=userid)
+        except:
+            pass
+        other_user = registration.objects.all().exclude(email=email)
+        dict1 = {
+            'email': email,
+            'user': user,
+            'others': other,
+            'other': other_user,
+            'followers': my_id,
+            'count':counts,
+            'count_following':count_following,
+            'mydetials': mydetials,
+            'userdata': user_data }
+
+        return render(request, 'following.html', dict1)
